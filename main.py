@@ -28,3 +28,16 @@ class Reserva(BaseModel):
                 "estado": "Activa"
             }
         }
+    reservas = []
+
+    @app.post("/reservas")
+    def crear_reserva(reserva: Reserva):
+        reservas.append(reserva)
+        return {
+            "mensaje": "Reserva registrada correctamente",
+            "reserva": reserva
+        }
+
+    @app.get("/reservas")
+    def obtener_reservas():
+        return reservas
